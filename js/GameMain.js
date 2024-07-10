@@ -9,6 +9,7 @@ class GameMain {
         this.dragOffsetX = 0;
         this.dragOffsetY = 0;
         this.counterMove = new CounterMove();
+
     }
 
     init() {
@@ -27,6 +28,7 @@ class GameMain {
 
     }
 
+
     drawCountMove(){
         this.counterMove.draw(this.ctx)
     }
@@ -38,7 +40,10 @@ class GameMain {
         }
     }
 
+
+
     draw() {
+        console.log(this.canvas.top)
         this.clearScreen();
         this.drawCountMove();
 

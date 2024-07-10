@@ -14,3 +14,6 @@ canvas {
 .game-title {
     text-align: center;
 }
+.controls {
+    padding-bottom: 5px;
+}
