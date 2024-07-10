@@ -139,8 +139,9 @@ class GameMain {
     checkEndGame() {
         this.towers.forEach(tower => {
             if (tower.name === "C" && tower.disks.length === DEFAULT_TOTAL_DISK) {
-                alert("Congratulations! You have won!");
-                return;
+               setTimeout(() => {
+                   alert("Congratulations! You have won!");
+               }, 1000)
             }
         })
     }
