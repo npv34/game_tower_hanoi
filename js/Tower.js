@@ -38,7 +38,6 @@ class Tower {
     }
 
     drawTower(ctx, x, y) {
-        console.log(this.name)
         const baseHeight = 10;
         ctx.fillStyle = this.color;
         ctx.fillRect(x - this.with / 2, y - this.height - 20, this.with, this.height);

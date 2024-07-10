@@ -84,18 +84,26 @@ class GameMain {
         const y = event.clientY - rect.top;
         const towerIndex = this.getTowerIndex(x);
 
-        if (towerIndex !== null && this.towers[towerIndex].disks.length > 0) {
-            const disk = this.towers[towerIndex].removeDisk();
+        const towerCurrent = this.towers[towerIndex];
+        const totalDiskOfTower = towerCurrent.disks.length;
+        const diskCurrent = towerCurrent.disks[totalDiskOfTower - 1];
 
-            this.draggingDisk = {
-                disk: disk,
-                from: towerIndex,
-                position: { x: x, y: y }
-            };
-            this.dragOffsetX = x - (150 + towerIndex * 150);
-            this.dragOffsetY = y - (300 - this.towers[towerIndex].disks.length * 20);
+        if (towerIndex !== null && totalDiskOfTower > 0) {
+            if (this.choseDisk(x, diskCurrent, y)) {
+                const disk = this.towers[towerIndex].removeDisk();
+                this.draggingDisk = {
+                    disk: disk,
+                    from: towerIndex,
+                    position: { x: x, y: y }
+                };
+                this.dragOffsetX = x - (150 + towerIndex * 150);
+                this.dragOffsetY = y - (300 - this.towers[towerIndex].disks.length * 20);
+            }
         }
+    }
 
+    choseDisk(x, disk, y) {
+        return x >= disk.x - disk.width / 2 && x <= disk.x + disk.width && y >= disk.y - disk.height && y <= disk.y + disk.height;
     }
 
     drag(event) {
@@ -103,7 +111,6 @@ class GameMain {
             const rect = this.canvas.getBoundingClientRect();
             const x = event.clientX - rect.left - this.dragOffsetX;
             const y = event.clientY - rect.top - this.dragOffsetY;
-
             this.draggingDisk.position = { x: x, y: y };
             this.draw();
         }
