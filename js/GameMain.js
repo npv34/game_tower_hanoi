@@ -132,7 +132,17 @@ class GameMain {
             }
             this.clearDragDiskCurrent();
             this.draw();
+            this.checkEndGame();
         }
+    }
+
+    checkEndGame() {
+        this.towers.forEach(tower => {
+            if (tower.name === "C" && tower.disks.length === DEFAULT_TOTAL_DISK) {
+                alert("Congratulations! You have won!");
+                return;
+            }
+        })
     }
 
     clearDragDiskCurrent() {
