@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const diskCountE = document.getElementById("diskCount");
     diskCountE.addEventListener("change", () => {
         const diskCount = parseInt(diskCountE.value);
-        if (diskCount === 6) {
+        if (diskCount === MAX_TOTAL_DISK) {
             alert("The maximum number of disks is 6.");
             return;
         }
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
-        start();
+        start(DEFAULT_TOTAL_DISK);
     })
 });
 
-function start(diskCount = 3) {
+function start(diskCount) {
     const game = new GameMain('my-canvas', diskCount);
     game.init();
 }
 
-start();
+start(DEFAULT_TOTAL_DISK);
