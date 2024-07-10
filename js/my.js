@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const diskCountE = document.getElementById("diskCount");
     diskCountE.addEventListener("change", () => {
         const diskCount = parseInt(diskCountE.value);
-        if (diskCount === MAX_TOTAL_DISK) {
-            alert("The maximum number of disks is 6.");
+        if (MAX_TOTAL_DISK - diskCount <= 0) {
+            alert("The maximum number of disks is " +  (diskCount - 1));
             return;
         }
         start(diskCount);
