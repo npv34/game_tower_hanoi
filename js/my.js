@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
+        document.getElementById("diskCount").value = DEFAULT_TOTAL_DISK
         start(DEFAULT_TOTAL_DISK);
     })
 });

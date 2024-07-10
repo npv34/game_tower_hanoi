@@ -9,13 +9,11 @@ class GameMain {
         this.dragOffsetX = 0;
         this.dragOffsetY = 0;
         this.counterMove = new CounterMove();
-
     }
 
     init() {
 
         this.createTower();
-
         for (let i = this.numDisks; i > 0; i--) {
             this.towers[0].addDisk(new Disk(i));
         }
@@ -84,11 +82,11 @@ class GameMain {
         const y = event.clientY - rect.top;
         const towerIndex = this.getTowerIndex(x);
 
-        const towerCurrent = this.towers[towerIndex];
-        const totalDiskOfTower = towerCurrent.disks.length;
-        const diskCurrent = towerCurrent.disks[totalDiskOfTower - 1];
+        const towerCurrent = towerIndex !== null ? this.towers[towerIndex] : null;
+        const totalDiskOfTower = towerCurrent !== null ?  towerCurrent.disks.length : 0;
 
         if (towerIndex !== null && totalDiskOfTower > 0) {
+            const diskCurrent = towerCurrent.disks[totalDiskOfTower - 1];
             if (this.choseDisk(x, diskCurrent, y)) {
                 const disk = this.towers[towerIndex].removeDisk();
                 this.draggingDisk = {
@@ -137,13 +135,11 @@ class GameMain {
     }
 
     checkEndGame() {
-        this.towers.forEach(tower => {
-            if (tower.name === "C" && tower.disks.length === DEFAULT_TOTAL_DISK) {
-               setTimeout(() => {
-                   alert("Congratulations! You have won!");
-               }, 1000)
-            }
-        })
+        if (this.towers[2].disks.length === this.numDisks) {
+            setTimeout(() => {
+                alert("Congratulations! You have won!");
+            }, 100)
+        }
     }
 
     clearDragDiskCurrent() {
