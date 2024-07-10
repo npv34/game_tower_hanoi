@@ -25,9 +25,7 @@ class GameMain {
         this.canvas.addEventListener('mouseup', this.endDrag.bind(this));
 
         this.draw();
-
     }
-
 
     drawCountMove(){
         this.counterMove.draw(this.ctx)
@@ -40,23 +38,29 @@ class GameMain {
         }
     }
 
-
-
     draw() {
-        console.log(this.canvas.top)
         this.clearScreen();
         this.drawCountMove();
+        this.drawTower();
+        this.drawDiskOfTower();
+    }
 
+    drawDiskOfTower() {
+        if (this.draggingDisk) {
+            const {x, y} = this.draggingDisk.position;
+            this.draggingDisk.disk.draw(this.ctx, x, y);
+        }
+    }
+
+    drawTower() {
         const startX = 150;
         const startY = 300;
+        const nameTower = ["A", "B", "C"]
 
         for (let i = 0; i < 3; i++) {
+            this.towers[i].setName(nameTower[i]);
             this.towers[i].draw(this.ctx, startX + i * 150, startY);
-        }
 
-        if (this.draggingDisk) {
-            const { x, y } = this.draggingDisk.position;
-            this.draggingDisk.disk.draw(this.ctx, x, y);
         }
     }
 

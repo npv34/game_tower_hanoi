@@ -5,6 +5,7 @@ class Tower {
         this.color = DEFAULT_COLOR_TOWER;
         this.with = DEFAULT_TOWER_WIDTH;
         this.height = DEFAULT_TOWER_HEIGHT;
+        this.name = "";
     }
 
     addDisk(disk) {
@@ -37,15 +38,25 @@ class Tower {
     }
 
     drawTower(ctx, x, y) {
+        console.log(this.name)
         const baseHeight = 10;
         ctx.fillStyle = this.color;
         ctx.fillRect(x - this.with / 2, y - this.height - 20, this.with, this.height);
         ctx.fillRect(x - 50, y - 20, 100, baseHeight);
+        //show name tower
+        ctx.fillStyle = 'black';
+        ctx.font = '20px Arial';
+        ctx.fillText(this.name, x - 10, y + 20);
+        ctx.closePath();
     }
 
     drawDisk(ctx, x, y) {
         for (let i = 0; i < this.disks.length; i++) {
             this.disks[i].draw(ctx, x, y - (i + 1) * 20);
         }
+    }
+
+    setName(name) {
+        this.name = name;
     }
 }
